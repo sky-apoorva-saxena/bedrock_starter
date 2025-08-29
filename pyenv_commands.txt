@@ -1,4 +1,4 @@
-# Essential pyenv commands for AWS Strands project setup
+
 
 # 1. Install Python 3.11.7 (recommended version)
 pyenv install 3.11.7
