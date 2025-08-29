@@ -4,7 +4,6 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.vectorstores import FAISS
 import boto3
 
-
 my_data = [
     "The weather is nice today.",
     "Last night's game ended in a tie.",
@@ -13,7 +12,6 @@ my_data = [
 ]
 
 question = "What does Don like to eat?"
-
 
 AWS_REGION = "eu-west-1"
 
@@ -26,7 +24,6 @@ bedrock_embeddings = BedrockEmbeddings(
 )
 
 # create embeddings
-
 vector_store = FAISS.from_texts(my_data, bedrock_embeddings)
 
 # create retriever
@@ -41,15 +38,12 @@ for result in results:
 # build template
 template = ChatPromptTemplate.from_messages(
     [
-        (
-            "system",
-            "Answer the users question based on the following context: {context}",
-        ),
+        ("system", "Answer the users question based on the following context: {context}"),
         ("user", "{input}"),
     ]
 )
 
 chain = template.pipe(model)
 
-resposnse = chain.invoke({"input": question, "context": result_strings})
-print(resposnse)
+response = chain.invoke({"input": question, "context": result_strings})
+print(response)

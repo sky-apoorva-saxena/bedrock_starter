@@ -6,7 +6,6 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import boto3
 
-
 AWS_REGION = "eu-west-1"
 
 bedrock = boto3.client(service_name="bedrock-runtime", region_name=AWS_REGION)
@@ -36,13 +35,9 @@ for result in results:
     results_string.append(result.page_content)
 
 # build template
-
 template = ChatPromptTemplate.from_messages(
     [
-        (
-            "system",
-            "Answer the users question based on the following context: {context}",
-        ),
+        ("system", "Answer the users question based on the following context: {context}"),
         ("user", "{input}"),
     ]
 )

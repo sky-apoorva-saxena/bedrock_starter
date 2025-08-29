@@ -37,9 +37,8 @@ response = client.invoke_model(
 #     body=llama_config,
 #     modelId=llama_model_id,
 #     accept="application/json",
-#     contentType="application/json"
+#     contentType="application/json",
 # )
-
 
 response_body = json.loads(response.get("body").read())
 

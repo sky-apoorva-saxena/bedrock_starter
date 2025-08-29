@@ -15,9 +15,7 @@ def invoke_model():
 
 
 def first_chain():
-    prompt = PromptTemplate.from_template(
-        "Write a short, compelling product description for: {product_name}"
-    )
+    prompt = PromptTemplate.from_template("Tell me about {product_name}")
 
     chain = prompt | model
 
