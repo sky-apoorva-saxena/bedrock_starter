@@ -1,0 +1,29 @@
+# Essential pyenv commands for AWS Strands project setup
+
+# 1. Install Python 3.11.7 (recommended version)
+pyenv install 3.11.7
+
+# 2. Set local Python version for this project
+pyenv local 3.11.7
+
+# 3. Create virtual environment
+python -m venv .venv
+
+# 4. Activate virtual environment
+source .venv/bin/activate
+
+# 5. Upgrade pip
+pip install --upgrade pip
+
+# 6. Install project dependencies
+pip install -r requirements.txt
+
+# 7. Verify installation
+python --version
+pip list
+
+# Additional useful commands:
+# - Deactivate virtual environment: deactivate
+# - Check pyenv versions: pyenv versions
+# - Check current version: pyenv version
+# - Remove local version: pyenv local --unset

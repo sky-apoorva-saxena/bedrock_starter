@@ -4,3 +4,6 @@ langchain_aws
 langchain-community
 faiss-cpu
 pypdf
+PyPDF2
+numpy
+scikit-learn
