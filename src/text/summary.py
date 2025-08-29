@@ -1,9 +1,9 @@
 import boto3
 import json
 
-client = boto3.client(service_name='bedrock-runtime', region_name='eu-west-1')
+client = boto3.client(service_name="bedrock-runtime", region_name="eu-west-1")
 
-titan_model_id = 'amazon.titan-text-express-v1'
+titan_model_id = "amazon.titan-text-express-v1"
 
 prompt = """
     Below is a phone conversation between Alex and Emily:
@@ -29,23 +29,25 @@ prompt = """
     From the call transcript above, create a summary of the conversation in maximum 30 words. 
 """
 
-titan_config = json.dumps({
-    "inputText": prompt,
-    "textGenerationConfig": {
-        "maxTokenCount": 4096,
-        "stopSequences": [],
-        "temperature": 0,
-        "topP": 1
+titan_config = json.dumps(
+    {
+        "inputText": prompt,
+        "textGenerationConfig": {
+            "maxTokenCount": 4096,
+            "stopSequences": [],
+            "temperature": 0,
+            "topP": 1,
+        },
     }
-})
+)
 
 response = client.invoke_model(
     body=titan_config,
     modelId=titan_model_id,
     accept="application/json",
-    contentType="application/json"
+    contentType="application/json",
 )
 
 
-response_body = json.loads(response.get('body').read())
-print(response_body.get('results')[0].get('outputText'))
+response_body = json.loads(response.get("body").read())
+print(response_body.get("results")[0].get("outputText"))

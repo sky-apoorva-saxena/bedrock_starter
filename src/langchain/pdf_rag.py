@@ -13,7 +13,9 @@ bedrock = boto3.client(service_name="bedrock-runtime", region_name=AWS_REGION)
 
 model = Bedrock(model_id="amazon.titan-text-express-v1", client=bedrock)
 
-bedrock_embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v2:0", client=bedrock)
+bedrock_embeddings = BedrockEmbeddings(
+    model_id="amazon.titan-embed-text-v2:0", client=bedrock
+)
 
 question = "What themes does Gone with the Wind explore?"
 
@@ -26,9 +28,7 @@ splitted_docs = splitter.split_documents(docs)
 vector_store = FAISS.from_documents(splitted_docs, bedrock_embeddings)
 
 # create retriever (finds and returns the relevant documents from vector store)
-retriever = vector_store.as_retriever(
-    search_kwargs={"k": 2}
-)
+retriever = vector_store.as_retriever(search_kwargs={"k": 2})
 results = retriever.invoke(question)
 
 results_string = []
@@ -41,12 +41,9 @@ template = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            "Answer the users question based on the following context: {context}"
+            "Answer the users question based on the following context: {context}",
         ),
-        (
-            "user",
-            "{input}"
-        )
+        ("user", "{input}"),
     ]
 )
 
@@ -54,4 +51,3 @@ chain = template.pipe(model)
 
 response = chain.invoke({"input": question, "context": results_string})
 print(response)
-
